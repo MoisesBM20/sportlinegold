@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap');
+
+/* Definición de variables de CSS para reusar en toda la app */
+:root {
+  --font-primary: 'Bebas Neue', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
+  --color-primary: #0a0a0a; 
+  --color-secondary: #ffffff;
+  --color-accent: #fa541c; 
+}
+
+/* Reseteo básico y estilos globales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-secondary);
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

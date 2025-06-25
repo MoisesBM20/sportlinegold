@@ -1,0 +1,78 @@
+.floating-contact-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  
+  &:hover .floating-contact-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+.floating-contact-text {
+  position: absolute;
+  right: 100%;
+  margin-right: 15px;
+  
+  background-color: white;
+  color: #005A9C;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+  
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+
+.floating-icon-link {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  
+  background: transparent;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.floating-icon-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: signal-pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes signal-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}

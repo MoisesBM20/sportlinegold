@@ -1,0 +1,18 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+    <a href="#" class="navbar-logo">SPORTIVE</a>
+
+    <div class="menu-icon" (click)="toggleMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <ul class="nav-menu" [class.active]="isMenuOpen">
+      <li class="nav-item"><a href="#" class="nav-link">Hombres</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Mujeres</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Niños</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Ofertas</a></li>
+    </ul>
+  </div>
+</nav>

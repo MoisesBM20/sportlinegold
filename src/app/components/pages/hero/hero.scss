@@ -1,0 +1,60 @@
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; // Ocupa toda la altura de la pantalla
+  padding: 0 2rem;
+  text-align: center;
+  color: var(--color-secondary);
+
+  // El fondo es la clave
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed; // Efecto parallax sutil
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-title {
+  font-family: var(--font-primary);
+  font-size: 6rem; // Grande e impactante
+  letter-spacing: 5px;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  padding: 1rem 2.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-secondary);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* --- Media Query para Mobile --- */
+@media screen and (max-width: 768px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+}
