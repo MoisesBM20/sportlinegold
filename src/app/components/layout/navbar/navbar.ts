@@ -1,43 +1,51 @@
-// navbar.component.ts
-import { Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './navbar.html',
-  styleUrls: ['./navbar.scss'],
-  // Se usa ViewEncapsulation.None para que los estilos globales de :root funcionen
-  // si se definen en este componente. Alternativamente, definirlos en styles.scss global.
-  encapsulation: ViewEncapsulation.None 
+  styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent {
   isMenuOpen = false;
   isScrolled = false;
-  isDropdownOpen = false;
+  isMegaMenuOpen = false;
 
-  // Escucha el evento de scroll en la ventana
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    // Añade la clase 'scrolled' si el scroll es mayor a 10px, si no, la quita.
-    this.isScrolled = window.scrollY > 10;
+    if (isPlatformBrowser(this.platformId)) {
+      this.isScrolled = window.scrollY > 10;
+    }
   }
 
-  // Alterna la visibilidad del menú en vista móvil
+  
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  // Muestra el menú desplegable en hover (escritorio)
-  showDropdown() {
-    // Solo se activa en pantallas más grandes que 1024px
-    if (window.innerWidth > 1024) {
-      this.isDropdownOpen = true;
+  // --- Lógica del Mega Menú para Escritorio ---
+  showMegaMenu() {
+    if (isPlatformBrowser(this.platformId) && window.innerWidth > 1024) {
+      this.isMegaMenuOpen = true;
     }
   }
 
-  // Oculta el menú desplegable al quitar el hover (escritorio)
-  hideDropdown() {
-    if (window.innerWidth > 1024) {
-      this.isDropdownOpen = false;
+  hideMegaMenu() {
+    if (isPlatformBrowser(this.platformId) && window.innerWidth > 1024) {
+      this.isMegaMenuOpen = false;
+    }
+  }
+  
+  // --- Lógica del Mega Menú para Móvil (al hacer tap) ---
+  toggleMegaMenuMobile(event: Event) {
+    if (isPlatformBrowser(this.platformId) && window.innerWidth <= 1024) {
+      event.preventDefault(); // Previene la navegación
+      this.isMegaMenuOpen = !this.isMegaMenuOpen;
     }
   }
 }

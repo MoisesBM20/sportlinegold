@@ -1,14 +1,15 @@
 /* navbar.component.scss */
 /* CHANGELOG:
-  - Cambiado el color de acento a un tono dorado para que coincida con el logo.
-  - Aumentado el tamaño de la fuente de los enlaces de navegación a 1.1rem para mayor legibilidad.
-  - Modificado el fondo del navbar: ahora es negro sólido en la parte superior.
-  - Añadido un sutil fondo degradado al hacer scroll para un efecto visual más dinámico.
+  - Corregido el color de texto principal del navbar a blanco.
+  - Añadido espacio entre el ícono de búsqueda y el texto del input.
+  - Asegurado que los enlaces del mega-menú sean blancos.
 */
 
 :root {
   --font-primary: 'Poppins', sans-serif;
-  --color-accent: #d4af37bd; /* Color dorado inspirado en el logo */
+  --color-accent: #202020;
+  --color-dark: #000000; /* Color de fondo cambiado a negro puro */
+  --color-light: #ffffff; /* Color de texto blanco */
 }
 
 .navbar {
@@ -21,37 +22,29 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
-  transition: background 0.4s ease, box-shadow 0.4s ease;
-  /* El navbar ahora es negro sólido por defecto (en el tope) */
-  background: #0a0a0a;
-  color: white;
+  transition: box-shadow 0.4s ease;
+  background: black; /* Fondo negro sólido y constante */
+  color: white; /* Color de texto principal blanco */
 
+  /* Al hacer scroll, solo se añade una sombra para dar profundidad. */
   &.scrolled {
-    /* Al hacer scroll, se aplica un sutil degradado y la sombra */
-    background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }
 }
-
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1400px; /* Ancho máximo extendido */
+  max-width: 1400px;
   padding: 0 2rem;
-  gap: 1.5rem; /* Espacio entre elementos principales */
+  gap: 1.5rem;
 }
-
-.navbar-logo {
-  flex-shrink: 0; /* Evita que el logo se encoja */
-  .logo-image {
+.navbar-logo .logo-image {
     height: 45px;
     width: auto;
     object-fit: contain;
-  }
 }
-
 .search-container {
   display: flex;
   align-items: center;
@@ -60,17 +53,12 @@
   padding: 5px 15px;
   width: 100%;
   max-width: 400px;
-  transition: background-color 0.3s;
-
-  &:focus-within {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
+  
   .search-icon {
-    color: #aaa;
-    margin-right: 10px;
+    /* Añadido espacio a la derecha del ícono de la lupa */
+    margin-right: 0.75rem;
   }
-
+  
   input {
     background: transparent;
     border: none;
@@ -78,9 +66,6 @@
     color: white;
     font-size: 1rem;
     width: 100%;
-    &::placeholder {
-      color: #aaa;
-    }
   }
 }
 
@@ -99,14 +84,15 @@
 
 .nav-link {
   font-family: var(--font-primary);
-  /* Aumentado el tamaño de la fuente como se solicitó */
   font-size: 1.1rem; 
   font-weight: 500;
   padding: 0.5rem;
   transition: color 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Espacio entre texto y flecha */
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--color-light); /* Asegura que el texto sea blanco */
   &:hover {
     color: var(--color-accent);
   }
@@ -119,22 +105,24 @@
   }
 }
 
-.dropdown-menu {
+/* --- ESTILOS DEL MEGA MENÚ --- */
+.mega-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
+  width: max-content;
+  max-width: 600px;
   background: #111;
   border: 1px solid #333;
   border-radius: 8px;
-  min-width: 280px;
   opacity: 0;
   visibility: hidden;
-  transform-origin: top center;
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 1000;
-  padding: 0.5rem;
+  padding: 1.5rem 2rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
 
   &.show {
     opacity: 1;
@@ -143,63 +131,78 @@
   }
 }
 
-.dropdown-item {
-  list-style: none;
+.mega-menu-inner {
+  display: flex;
+  gap: 3rem;
 }
 
-.dropdown-link {
-  display: block;
-  padding: 0.8rem 1.2rem;
-  color: #eee;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 6px;
-
-  &:hover {
-    background-color: var(--color-accent);
-    color: white;
-    h4 { color: white; }
-    p { color: #f0f0f0; }
-  }
-
-  h4 {
-    margin: 0 0 0.25rem 0;
+.mega-menu-column {
+  .mega-menu-title {
     font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    transition: color 0.3s ease;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
   }
 
-  p {
+  .mega-menu-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    font-size: 0.85rem;
-    color: #aaa;
-    line-height: 1.4;
+
+    li {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .mega-menu-link {
+    color: var(--color-light); /* Asegura que el texto de los enlaces sea blanco */
+    text-decoration: none;
+    font-size: 1rem;
     transition: color 0.3s ease;
+    &:hover {
+      color: var(--color-accent);
+    }
   }
 }
 
+.promo-column {
+  border-left: 1px solid #444;
+  padding-left: 2rem;
+  .promo-image {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  .promo-title {
+    font-size: 1.1rem;
+    color: var(--color-light);
+    margin-bottom: 0.5rem;
+  }
+  .promo-text {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .promo-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
 .navbar-icons {
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  
-  .icon-link {
-    color: white;
-    transition: color 0.3s, transform 0.3s;
+}
+.cart-link {
     position: relative;
-    &:hover {
-      color: var(--color-accent);
-      transform: scale(1.1);
-    }
-  }
-
-  .cart-link {
-    display: flex;
-    align-items: center;
-  }
-
-  .cart-badge {
+}
+.cart-badge {
     position: absolute;
     top: -5px;
     right: -10px;
@@ -213,127 +216,61 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #0a0a0a;
-  }
 }
-
 .menu-icon {
   display: none;
-  cursor: pointer;
-  .bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-    transition: 0.4s;
-  }
 }
 
-/* Ocultar elementos específicos en móvil por defecto */
-.nav-item-mobile-search, .search-container-mobile {
-  display: none;
-}
 
 /* --- Media Query para Móvil y Tablet --- */
 @media screen and (max-width: 1024px) {
+  .menu-icon {
+    display: block;
+  }
   .search-container {
-    display: none; /* Oculta la barra de búsqueda principal */
+    display: none;
   }
   .nav-menu {
-    display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     height: 100vh;
     position: fixed;
-    top: 0;
-    left: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
+    top: 0; left: -100%;
     background: #0a0a0a;
     padding-top: 100px;
-    z-index: 998;
+    transition: all 0.5s ease;
   }
-  
-  .nav-menu.active {
-    left: 0;
-  }
+  .nav-menu.active { left: 0; }
 
-  .nav-item {
-    padding: 1rem 0;
-    width: 80%;
-    text-align: center;
-  }
-
-  .nav-link {
-    font-size: 1.5rem;
-    justify-content: center;
-  }
-
-  .menu-icon {
-    display: block;
-    z-index: 999; /* Para que esté por encima del menú */
-  }
-
-  .navbar-icons {
-      gap: 1rem; // Reduce el espacio en pantallas más pequeñas
-  }
-
-  // Búsqueda en móvil
-  .nav-item-mobile-search {
-    display: list-item;
-    width: 80%;
-    margin-bottom: 1rem;
-  }
-  .search-container-mobile {
-    display: flex;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 8px 15px;
-    width: 100%;
-
-    input {
-      font-size: 1.2rem;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: white;
-      width: 100%;
-    }
-    .search-icon {
-      color: #aaa;
-      margin-right: 10px;
-    }
-  }
-
-  .dropdown-menu {
+  .mega-menu {
     position: static;
+    width: 100%;
     background: transparent;
     border: none;
     box-shadow: none;
     opacity: 1;
     visibility: visible;
     transform: none;
-    padding: 0;
+    padding: 0.5rem 0 0 1.5rem;
     margin-top: 1rem;
-    width: 100%;
-    display: none;
-    min-width: unset;
+    display: none; // Oculto por defecto en móvil
 
     &.show {
-      display: block;
+      display: block; // Se muestra al hacer tap
     }
   }
 
-  .dropdown-link {
-    padding: 0.75rem 1rem;
-    text-align: center;
-    h4 { font-size: 1.2rem; }
-    p { font-size: 0.9rem; }
+  .mega-menu-inner {
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  .navbar-container {
-    padding: 0 1.5rem;
+  .mega-menu-column .mega-menu-title {
+    margin-bottom: 1rem;
+    /* Los títulos mantienen el color de acento también en móvil por consistencia */
+  }
+
+  .promo-column {
+    display: none; // Ocultar columna de promo en móvil para simplificar
   }
 }

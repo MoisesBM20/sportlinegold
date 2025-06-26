@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './footer.html',
   styleUrl: './footer.scss'
 })
-export class FooterComponent { // <-- ¡ESTA LÍNEA ES LA CLAVE!
+export class FooterComponent { 
 
 }
