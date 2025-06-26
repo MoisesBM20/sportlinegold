@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/layout/navbar/navbar';
 import { FooterComponent } from './components/layout/footer/footer';
 
+import { ShoesComponent } from './components/pages/category/shoes/shoes';
 
 @Component({
   selector: 'app-root',
