@@ -1,7 +1,145 @@
-<section class="hero-section">
-  <div class="hero-content">
-    <h1 class="hero-title">EQUIPA TU PASIÓN</h1>
-    <p class="hero-subtitle">La última colección diseñada para superar tus límites.</p>
-    <a href="#" class="hero-cta">COMPRAR AHORA</a>
+<!-- home.component.html -->
+
+<!-- 1. SECCIÓN HERO CON CARRUSEL GIGANTE -->
+<section class="hero-carousel">
+  <div class="carousel-container" [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'">
+    <!-- Slide 1: General -->
+    <div class="carousel-slide slide-1">
+      <div class="slide-background"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">CONQUISTA TUS METAS</h1>
+        <p class="hero-subtitle">La nueva colección está diseñada para llevarte más allá de tus límites.</p>
+        <a href="#" class="hero-cta">EXPLORAR COLECCIÓN</a>
+      </div>
+    </div>
+    <!-- Slide 2: Calzado -->
+    <div class="carousel-slide slide-2">
+      <div class="slide-background"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">PISADA IMBATIBLE</h1>
+        <p class="hero-subtitle">Descubre la tecnología en calzado que te impulsa a la victoria.</p>
+        <a href="#" class="hero-cta">VER CALZADO</a>
+      </div>
+    </div>
+    <!-- Slide 3: Ropa -->
+    <div class="carousel-slide slide-3">
+      <div class="slide-background"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">ESTILO QUE COMPITE</h1>
+        <p class="hero-subtitle">Ropa deportiva que fusiona rendimiento y diseño de vanguardia.</p>
+        <a href="#" class="hero-cta">DESCUBRIR ROPA</a>
+      </div>
+    </div>
+  </div>
+  <!-- Controles de Navegación del Carrusel -->
+  <div class="carousel-controls">
+    <button class="control-btn prev" (click)="prevSlide()">&#10094;</button>
+    <button class="control-btn next" (click)="nextSlide()">&#10095;</button>
+  </div>
+  <div class="carousel-indicators">
+    <span *ngFor="let slide of slides; let i = index" 
+          class="indicator" 
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)">
+    </span>
   </div>
 </section>
+
+<main class="page-content">
+
+  <!-- 2. SECCIÓN DE CATEGORÍAS DESTACADAS -->
+  <section class="featured-categories">
+    <div class="category-card">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Calzado deportivo">
+      <div class="category-info">
+        <h3>Calzado</h3>
+        <a href="#" class="category-link">Ver más</a>
+      </div>
+    </div>
+    <div class="category-card">
+      <img src="https://images.unsplash.com/photo-1581022221069-3449c716fd92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Ropa deportiva">
+      <div class="category-info">
+        <h3>Ropa</h3>
+        <a href="#" class="category-link">Ver más</a>
+      </div>
+    </div>
+    <div class="category-card">
+      <img src="https://images.unsplash.com/photo-1511399728243-f227cde3a4e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Accesorios deportivos">
+      <div class="category-info">
+        <h3>Accesorios</h3>
+        <a href="#" class="category-link">Ver más</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SECCIÓN "TU GUÍA DEPsORTIVA" -->
+  <section class="guidance-section">
+    <div class="guidance-image">
+      <!-- Imagen de un asesor o atleta profesional -->
+      <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" alt="Asesor deportivo profesional">
+    </div>
+    <div class="guidance-content">
+      <h2 class="section-subtitle">TU GUÍA DEPORTIVA</h2>
+      <h1 class="section-title">ELEVA TU RENDIMIENTO CON ASESORÍA EXPERTA</h1>
+      <p>No se trata solo de equipamiento, se trata de estrategia. Mi servicio de asesoramiento personalizado está diseñado para atletas como tú, que buscan optimizar cada entrenamiento, perfeccionar su técnica y alcanzar metas que parecían imposibles. Juntos, crearemos un plan a tu medida.</p>
+      <a href="#" class="guidance-cta">CONOCE MÁS</a>
+    </div>
+  </section>
+
+  <!-- 4. SECCIÓN DE NOVEDADES -->
+  <section class="new-arrivals">
+    <h2 class="section-title text-center">ÚLTIMOS LANZAMIENTOS</h2>
+    <div class="product-grid">
+      <!-- Producto 1 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://placehold.co/400x400/111111/D4AF37?text=Producto+1" alt="Producto 1">
+          <a href="#" class="quick-view">VISTA RÁPIDA</a>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Zapatillas Quantum-X</h3>
+          <p class="product-category">Running</p>
+          <p class="product-price">$180.00</p>
+        </div>
+      </div>
+      <!-- Producto 2 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://placehold.co/400x400/111111/D4AF37?text=Producto+2" alt="Producto 2">
+          <a href="#" class="quick-view">VISTA RÁPIDA</a>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Leggings Flex-Fit</h3>
+          <p class="product-category">Training</p>
+          <p class="product-price">$85.00</p>
+        </div>
+      </div>
+      <!-- Producto 3 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://placehold.co/400x400/111111/D4AF37?text=Producto+3" alt="Producto 3">
+          <a href="#" class="quick-view">VISTA RÁPIDA</a>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Chaqueta Viento-Cero</h3>
+          <p class="product-category">Outdoor</p>
+          <p class="product-price">$120.00</p>
+        </div>
+      </div>
+      <!-- Producto 4 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://placehold.co/400x400/111111/D4AF37?text=Producto+4" alt="Producto 4">
+          <a href="#" class="quick-view">VISTA RÁPIDA</a>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Top Deportivo Aura</h3>
+          <p class="product-category">Yoga</p>
+          <p class="product-price">$60.00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+

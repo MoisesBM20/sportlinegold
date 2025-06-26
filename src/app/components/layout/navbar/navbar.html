@@ -1,18 +1,108 @@
+<!-- navbar.component.html -->
+<!-- 
+  CHANGELOG:
+  - Añadida una barra de búsqueda (.search-container) entre el logo y el menú de navegación.
+  - Reemplazado el texto '▼' por un ícono SVG para la flecha del menú desplegable.
+  - Asegurada la estructura para una mejor organización y estilo.
+-->
 <nav class="navbar" [class.scrolled]="isScrolled">
   <div class="navbar-container">
-    <a href="#" class="navbar-logo">SPORTIVE</a>
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-logo">
+      <img src="./assets/images/global/LOGO.jpeg" alt="Sportlinegold Logo" class="logo-image">
+    </a>
 
+    <!-- Barra de Búsqueda (Visible en Escritorio) -->
+    <div class="search-container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" placeholder="Buscar productos...">
+    </div>
+
+    <!-- Botón Hamburguesa para Móvil -->
     <div class="menu-icon" (click)="toggleMenu()">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
 
+    <!-- Menú de Navegación -->
     <ul class="nav-menu" [class.active]="isMenuOpen">
-      <li class="nav-item"><a href="#" class="nav-link">Hombres</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Mujeres</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Niños</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Ofertas</a></li>
+      <!-- Barra de Búsqueda (Visible en Móvil) -->
+      <li class="nav-item-mobile-search">
+        <div class="search-container-mobile">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="Buscar...">
+        </div>
+      </li>
+
+      <!-- Enlaces de Navegación -->
+      <li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
+      
+      <li class="nav-item dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+        <a href="#" class="nav-link">
+          Tiendas
+          <!-- Icono de flecha SVG -->
+          <svg class="dropdown-chevron" [class.rotated]="isDropdownOpen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+          <li class="dropdown-item">
+            <a href="#" class="dropdown-link">
+              <h4>Deportivos</h4>
+              <p>Ropa y equipamiento para todos los deportes</p>
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#" class="dropdown-link">
+              <h4>Viste de Lujo</h4>
+              <p>Colección premium para ocasiones especiales</p>
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#" class="dropdown-link">
+              <h4>Suplementos Deportivos</h4>
+              <p>Nutrición para optimizar tu rendimiento</p>
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#" class="dropdown-link">
+              <h4>Viste Casual</h4>
+              <p>Estilo cómodo y moderno para el día a día</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="nav-item"><a href="#" class="nav-link">Productos</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Nosotros</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Contáctanos</a></li>
     </ul>
+
+    <!-- Iconos de la Derecha -->
+    <div class="navbar-icons">
+      <a href="#" class="icon-link" title="Mi Cuenta">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </a>
+      <a href="#" class="icon-link" title="Favoritos">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </a>
+      <a href="#" class="icon-link cart-link" title="Carrito de Compras">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+        <span class="cart-badge">3</span>
+      </a>
+    </div>
   </div>
 </nav>
